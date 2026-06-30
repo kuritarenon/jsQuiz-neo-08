@@ -6,8 +6,6 @@
     <title>jsQuiz08 - querySelectorAll と filter / map</title>
     <style>
       body {
-        width: 700px;
-        margin: 20px auto;
         padding: 0 16px;
       }
 
@@ -45,90 +43,190 @@
         font-size: 0.9rem;
       }
 
-      .result {
-        margin-top: 20px;
-        padding: 12px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        min-height: 1.5rem;
+      /* 表示しないカードに付くクラス */
+      .hidden {
+        display: none;
       }
     </style>
   </head>
   <body>
-    <h1>絵文字ギャラリー</h1>
-
-    <!-- カードは HTML にすべて並べてあります（書き換えないこと） -->
-    <div class="gallery">
-      <div class="card" data-category="fruit">
-        <div class="card-emoji">🍎</div>
-        <div class="card-name">りんご</div>
-      </div>
-      <div class="card" data-category="fruit">
-        <div class="card-emoji">🍊</div>
-        <div class="card-name">みかん</div>
-      </div>
-      <div class="card" data-category="fruit">
-        <div class="card-emoji">🍇</div>
-        <div class="card-name">ぶどう</div>
-      </div>
-      <div class="card" data-category="animal">
-        <div class="card-emoji">🐶</div>
-        <div class="card-name">いぬ</div>
-      </div>
-      <div class="card" data-category="animal">
-        <div class="card-emoji">🐱</div>
-        <div class="card-name">ねこ</div>
-      </div>
-      <div class="card" data-category="animal">
-        <div class="card-emoji">🐼</div>
-        <div class="card-name">ぱんだ</div>
-      </div>
-      <div class="card" data-category="food">
-        <div class="card-emoji">🍜</div>
-        <div class="card-name">ラーメン</div>
-      </div>
-      <div class="card" data-category="food">
-        <div class="card-emoji">🍣</div>
-        <div class="card-name">すし</div>
-      </div>
-      <div class="card" data-category="food">
-        <div class="card-emoji">🍰</div>
-        <div class="card-name">ケーキ</div>
-      </div>
-    </div>
+    <h1>W杯2026 ラウンド32 国旗ギャラリー（地域別）</h1>
 
     <div class="filter-buttons">
       <button class="filter-btn filter-all-btn" data-category="all">すべて</button>
-      <button class="filter-btn" data-category="fruit">くだもの</button>
-      <button class="filter-btn" data-category="animal">どうぶつ</button>
-      <button class="filter-btn" data-category="food">たべもの</button>
+      <button class="filter-btn" data-category="europe">ヨーロッパ</button>
+      <button class="filter-btn" data-category="southamerica">南米</button>
+      <button class="filter-btn" data-category="northamerica">北中米</button>
+      <button class="filter-btn" data-category="africa">アフリカ</button>
+      <button class="filter-btn" data-category="asia">アジア・オセアニア</button>
     </div>
 
-    <!-- ボタンで選んだカテゴリの「なまえ一覧」がここに出ます -->
-    <p class="result"></p>
+    <!-- カードは HTML にすべて並べてあります（書き換えないこと） -->
+    <div class="gallery">
+      <!-- ヨーロッパ -->
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇨🇭</div>
+        <div class="card-name">スイス</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇩🇪</div>
+        <div class="card-name">ドイツ</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇳🇱</div>
+        <div class="card-name">オランダ</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇧🇪</div>
+        <div class="card-name">ベルギー</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇪🇸</div>
+        <div class="card-name">スペイン</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇫🇷</div>
+        <div class="card-name">フランス</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🏴</div>
+        <div class="card-name">イングランド</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇳🇴</div>
+        <div class="card-name">ノルウェー</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇦🇹</div>
+        <div class="card-name">オーストリア</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇵🇹</div>
+        <div class="card-name">ポルトガル</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇭🇷</div>
+        <div class="card-name">クロアチア</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇸🇪</div>
+        <div class="card-name">スウェーデン</div>
+      </div>
+      <div class="card" data-category="europe">
+        <div class="card-emoji">🇧🇦</div>
+        <div class="card-name">ボスニア・ヘルツェゴビナ</div>
+      </div>
+
+      <!-- 南米 -->
+      <div class="card" data-category="southamerica">
+        <div class="card-emoji">🇧🇷</div>
+        <div class="card-name">ブラジル</div>
+      </div>
+      <div class="card" data-category="southamerica">
+        <div class="card-emoji">🇦🇷</div>
+        <div class="card-name">アルゼンチン</div>
+      </div>
+      <div class="card" data-category="southamerica">
+        <div class="card-emoji">🇨🇴</div>
+        <div class="card-name">コロンビア</div>
+      </div>
+      <div class="card" data-category="southamerica">
+        <div class="card-emoji">🇪🇨</div>
+        <div class="card-name">エクアドル</div>
+      </div>
+      <div class="card" data-category="southamerica">
+        <div class="card-emoji">🇵🇾</div>
+        <div class="card-name">パラグアイ</div>
+      </div>
+
+      <!-- 北中米 -->
+      <div class="card" data-category="northamerica">
+        <div class="card-emoji">🇲🇽</div>
+        <div class="card-name">メキシコ</div>
+      </div>
+      <div class="card" data-category="northamerica">
+        <div class="card-emoji">🇺🇸</div>
+        <div class="card-name">アメリカ</div>
+      </div>
+      <div class="card" data-category="northamerica">
+        <div class="card-emoji">🇨🇦</div>
+        <div class="card-name">カナダ</div>
+      </div>
+
+      <!-- アフリカ -->
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇿🇦</div>
+        <div class="card-name">南アフリカ</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇲🇦</div>
+        <div class="card-name">モロッコ</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇨🇮</div>
+        <div class="card-name">コートジボワール</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇪🇬</div>
+        <div class="card-name">エジプト</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇨🇻</div>
+        <div class="card-name">カーボベルデ</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇨🇩</div>
+        <div class="card-name">DRコンゴ</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇬🇭</div>
+        <div class="card-name">ガーナ</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇩🇿</div>
+        <div class="card-name">アルジェリア</div>
+      </div>
+      <div class="card" data-category="africa">
+        <div class="card-emoji">🇸🇳</div>
+        <div class="card-name">セネガル</div>
+      </div>
+
+      <!-- アジア・オセアニア -->
+      <div class="card" data-category="asia">
+        <div class="card-emoji">🇦🇺</div>
+        <div class="card-name">オーストラリア</div>
+      </div>
+      <div class="card" data-category="asia">
+        <div class="card-emoji">🇯🇵</div>
+        <div class="card-name">日本</div>
+      </div>
+    </div>
 
     <script>
       // ===== 「取得」と「表示」は用意済みです（書き換えないこと）=====
-
-      const result = document.querySelector('.result');
       const buttons = document.querySelectorAll('.filter-btn');
-
-      // カテゴリを選ぶと、そのカテゴリのカードの「なまえ一覧」を表示する（用意済み）。
+      // 地域を選ぶと、その地域のカードだけをギャラリー上に表示する（用意済み）。
       const showCategory = function (category) {
-        // HTML に並んだカードを取得して配列にする。
-        // querySelectorAll が返す NodeList は map/filter が使えないので、
-        // Array.from で「配列」に変換しておく。
+        // querySelectorAllはNodeListなので、map/filter が使えない。Array.fromで「配列」に変換しておく。
         const cards = Array.from(document.querySelectorAll('.card'));
 
         let selected;
         if (category === 'all') {
           selected = cards;
         } else {
+          // filterByCategoryを実行する。関数にcardsとcategoryを渡す。
           selected = filterByCategory(cards, category);
         }
-
+        // 表示する国名の一覧を取得する関数toNamesを実行して配列を代入
         const names = toNames(selected);
-        result.textContent = names.join('、');
+        cards.forEach(function (card) {
+          const name = card.querySelector('.card-name').textContent;
+          if (names.includes(name)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
       };
 
       // 各ボタンを押すと、そのカテゴリを表示する（用意済み）。
@@ -138,36 +236,28 @@
         });
       });
 
-      // 最初はすべて表示しておく（用意済み）。
-      showCategory('all');
+      // 最初はHTMLに並んだカードがそのまま全件表示されています（用意済み）。
+      // ボタンを押すとshowCategoryが呼ばれてその地域だけに絞り込まれます。この関数の中で実行されるfilterByCategoryとtoNamesを用意してください。
 
       // ===== ここから下があなたの課題です =====
-      //
-      // students/{あなたの学籍番号}/index.html にコピーして提出してください。
-      //
-      // やること:
-      //   次の2つの関数を作る。
-      //
-      //   1) filterByCategory(cards, category)   … filter だけを使う
-      //        カード要素の配列 cards から、data-category が category と一致するものだけを
-      //        filter で絞り込んで return する。
-      //
-      //   2) toNames(cards)                      … map だけを使う
-      //        カード要素の配列 cards を、各カードの名前（.card-name の文字）の配列に
-      //        map で変換して return する。
-      //
-      // 【ヒント】
-      //   function filterByCategory(cards, category) {
-      //     return cards.filter(function (card) {
-      //       return card.dataset.category === category; // data-category の値
-      //     });
-      //   }
-      //
-      //   function toNames(cards) {
-      //     return cards.map(function (card) {
-      //       return card.querySelector('.card-name').textContent; // カードの名前
-      //     });
-      //   }
+
+      // やること：次の2つの関数を完成させること。
+      //   1) filterByCategory(cards, category)・・・filter だけを使う
+      //   カード要素の配列 cards から、data-category が category と一致するものだけをfilter で絞り込んで return する。
+      //   2) toNames(cards)・・・map だけを使う
+      //   カード要素の配列 cards を、各カードの名前（.card-name の文字）の配列にmapで変換して return する。
+
+      function filterByCategory(cards, category) {
+        return cards.filter(function (card) {
+          console.log(card.dataset.category, category);
+        });
+      }
+
+      function toNames(cards) {
+        return cards.map(function (card) {
+          console.log(card.querySelector('.card-name').textContent);
+        });
+      }
     </script>
   </body>
 </html>
