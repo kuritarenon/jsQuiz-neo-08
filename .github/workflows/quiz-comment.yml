@@ -49,7 +49,7 @@ jobs:
               body = [
                 '## ✅ 合格！',
                 '',
-                `**${file}** のボタン操作と \`filter\`／\`map\` による絵文字カードの表示が正しく動きました。`,
+                `**${file}** の \`filter\`／\`map\` による名前一覧の絞り込み・変換が正しく動きました。`,
                 'お疲れ様でした！',
               ].join('\n');
             } else if (result === 'no_file') {
@@ -63,15 +63,13 @@ jobs:
               body = [
                 '## ❌ 不合格',
                 '',
-                `**${file}** のボタン操作、または絵文字カードの表示が期待通りに動きませんでした。`,
+                `**${file}** の名前一覧の表示が期待通りに動きませんでした。`,
                 '',
                 '**確認ポイント**',
-                '- `filter()` で `item.category === category` のものだけに絞り込めていますか？',
-                '- 絞り込んだ結果を `map(cardHtml)` でカードに変換し、`join(\'\')` でつなげて `gallery.innerHTML` に入れていますか？',
-                '- 各 `.filter-btn` ボタンに `click` イベントを設定していますか？（`buttons.forEach` → `addEventListener`）',
-                '- 「すべて表示」ボタン（`.filter-all-btn`・`data-category` なし）で全件表示に戻していますか？',
-                '- 用意済みの `items` / `buttons` / `cardHtml` を書き換えたり、宣言し直したりしていませんか？',
-                '- 別カテゴリに切り替えたとき、前のカテゴリのカードが残っていませんか？',
+                '- `filterByCategory(cards, category)` と `toNames(cards)` の2つの関数を作りましたか？',
+                '- `filterByCategory` は `filter()` で `card.dataset.category === category` のカードだけに絞り込んで `return` していますか？',
+                '- `toNames` は `map()` で各カードの `.card-name` の文字を取り出した配列を `return` していますか？',
+                '- 用意済みのカード取得・ボタン処理を書き換えたり、宣言し直したりしていませんか？',
                 '',
                 'コードを修正して再度 push してください。',
               ].join('\n');

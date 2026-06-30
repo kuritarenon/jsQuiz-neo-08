@@ -168,6 +168,19 @@
       //       return card.querySelector('.card-name').textContent; // カードの名前
       //     });
       //   }
+
+      // --- 模範解答（動作確認用）---
+      function filterByCategory(cards, category) {
+        return cards.filter(function (card) {
+          return card.dataset.category === category;
+        });
+      }
+
+      function toNames(cards) {
+        return cards.map(function (card) {
+          return card.querySelector('.card-name').textContent;
+        });
+      }
     </script>
   </body>
 </html>

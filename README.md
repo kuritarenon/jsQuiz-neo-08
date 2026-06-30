@@ -1,81 +1,75 @@
 # jsQuiz-neo-08
 
-「`map` と `filter` を使ったデータの絞り込み・変換と描画」の振り返りです。
+「`querySelectorAll` で取得した要素を `filter` で絞り込み、`map` で変換する」の振り返りです。
 
 ## 課題内容
 
-カテゴリボタンを押したとき、そのカテゴリの絵文字（`items`）だけを `filter` で絞り込み、`map` でカード HTML に変換してギャラリーに表示します。「すべて表示」ボタンですべての絵文字カードを表示に戻します。
+HTML に絵文字カードがすべて並べてあります。カテゴリボタンを押したとき、`querySelectorAll` で取得したカードを `filter` でそのカテゴリだけに絞り込み、`map` で「なまえの一覧」に変換して画面下に表示します。
 
-**データ（`items`）とカードを作る関数（`cardHtml`）は `index.html` にすでに用意してあります。**
-あなたの課題は、**`filter` で絞り込み → `map(cardHtml)` で変換 → 描画する処理を書き、各ボタンに `click` イベントを設定する**ことです。
+**カードの取得・ボタンのクリック処理・画面への表示は `index.html` にすでに用意してあります。**
+あなたの課題は、**`filter` だけを使う関数と `map` だけを使う関数の2つを書く**ことだけです。
+
+> `querySelectorAll` が返す `NodeList` は `map`／`filter` が使えません。用意済みのコードが `Array.from(...)` で配列に変換してから、あなたの関数に渡します。
 
 <!-- ![Quiz8の課題](./sample.gif) -->
 
 ### HTML の構造（ひな形）
 
+- ギャラリー `.gallery` の中に9枚の `<div class="card" data-category="...">`（HTML に固定で並べてある）
+  - カード1枚は `.card-emoji`（絵文字）と `.card-name`（名前）を持つ
+  - `data-category` の値は `fruit` / `animal` / `food`
 - フィルターボタン群 `.filter-buttons` の中に4つの `<button class="filter-btn">`
-  - 「すべて表示」… `.filter-btn.filter-all-btn`（`data-category` なし）
-  - 「くだもの」… `<button class="filter-btn" data-category="fruit">`
-  - 「どうぶつ」… `<button class="filter-btn" data-category="animal">`
-  - 「たべもの」… `<button class="filter-btn" data-category="food">`
-- ギャラリー `.gallery`（ここに `.card` を描画する。初期状態は全件表示）
-- カード1枚は `<div class="card">` の中に `.card-emoji`（絵文字）と `.card-name`（名前）
+  - 「すべて」… `data-category="all"`
+  - 「くだもの」… `data-category="fruit"`
+  - 「どうぶつ」… `data-category="animal"`
+  - 「たべもの」… `data-category="food"`
+- 結果表示エリア `.result`（ここに選んだカテゴリの名前一覧が出る）
 
-### 用意済みのデータ・関数（書き換えないこと）
+### 用意済みの処理（書き換えないこと）
 
-`index.html` の `<script>` 前半に、以下がすでに定義されています。
+`index.html` の `<script>` 前半に、以下がすでに用意されています。
 
-```js
-const items = [ { name, emoji, category }, ... ]; // 絵文字データの配列
-const gallery = document.querySelector('.gallery');
-const buttons = document.querySelectorAll('.filter-btn');
+- `Array.from(document.querySelectorAll('.card'))` でカード要素の配列を取得
+- 各ボタンの `click` イベント設定
+- 結果を `.result` に表示する処理 / 初期表示（すべて）
 
-cardHtml(item)  // データ1件を受け取り、カード1枚分の HTML 文字列を返す
-```
-
-初期表示（全件）も用意済みです（`gallery.innerHTML = items.map(cardHtml).join('');`）。
+ボタンを押すと、あなたが作る `filterByCategory` と `toNames` が呼ばれて結果が表示されます。
 これらは完成済みなので、**自分で作り直さないでください**（中身を変更しないでください）。
 
 ### あなたの課題
 
-1. 指定したカテゴリの絵文字だけを表示する関数 `showByCategory(category)` を作る。
-   - `items` を `filter()` で「`category` が一致するものだけ」に絞り込み、
-   - その結果を `map(cardHtml)` でカード HTML に変換し、`join('')` でつなげて、
-   - `gallery.innerHTML` に入れる。
-2. `.filter-btn` の各ボタン（変数 `buttons`）に `click` イベントを設定する。
+次の2つの関数を作ってください。引数 `cards` は**カード要素の配列**です。
 
-| ボタン | 動作 |
-|---|---|
-| くだもの（`data-category="fruit"`） | `showByCategory('fruit')` |
-| どうぶつ（`data-category="animal"`） | `showByCategory('animal')` |
-| たべもの（`data-category="food"`）  | `showByCategory('food')` |
-| すべて表示（`.filter-all-btn`） | 全件をカードにして表示し直す |
+1. **`filterByCategory(cards, category)`** … `filter` だけを使う
+   - `cards` の中から「`data-category` が `category` と一致するものだけ」に絞り込んで `return` する。
+2. **`toNames(cards)`** … `map` だけを使う
+   - `cards` を、各カードの名前（`.card-name` の文字）の配列に変換して `return` する。
 
-**別のカテゴリに切り替えたとき、前のカテゴリのカードが残らないこと**（毎回 `gallery.innerHTML` を作り直せば自動的にそうなります）。
+`filter` と `map` を1つにまとめず、**別々の関数**にするのがポイントです。
 
 ---
 
 ## 制作手順（ヒント）
 
-用意済みの処理より**後ろ**に、次の処理を書きます。
+用意済みの処理より**後ろ**に、次の2つの関数を書きます。
 
-1. `showByCategory(category)` を定義する
-   ```js
-   const showByCategory = function (category) {
-     gallery.innerHTML = items
-       .filter(function (item) { return item.category === category; })
-       .map(cardHtml)
-       .join('');
-   };
-   ```
-2. `buttons.forEach(function (btn) { ... })` で各ボタンを順番に処理する
-3. ループの中で `btn.addEventListener('click', function () { ... })` を設定する
-4. クリック時の処理:
-   - `const category = btn.getAttribute('data-category');`
-   - `category` があれば `showByCategory(category)` を呼ぶ
-   - `category` がなければ（＝「すべて表示」ボタン）`gallery.innerHTML = items.map(cardHtml).join('');`
+```js
+// filter だけを使う：data-category が一致するカードだけ残す
+function filterByCategory(cards, category) {
+  return cards.filter(function (card) {
+    return card.dataset.category === category;
+  });
+}
 
-`items` / `buttons` / `cardHtml` はすでに使える状態なので、新しく宣言し直さないでください。
+// map だけを使う：カード要素の配列を、名前の配列に変換する
+function toNames(cards) {
+  return cards.map(function (card) {
+    return card.querySelector('.card-name').textContent;
+  });
+}
+```
+
+`card.dataset.category` は `card.getAttribute('data-category')` と同じ意味です。
 
 ---
 
@@ -129,9 +123,9 @@ jsQuiz-neo-08/
 ## 注意
 
 - `students/{自分の番号}/index.html` の `<script>` 内、**「ここから下があなたの課題です」より後ろ**だけ編集してください
-- 用意済みのデータ・関数（`items` / `buttons` / `cardHtml`）は書き換えないでください
-- HTML構造（`.filter-buttons` / `.filter-btn` / `.filter-all-btn` / `.gallery` / `.card` / `data-category`）は変えないでください
-- `items` の `category` の値（`fruit` / `animal` / `food`）は変更しないでください
+- 用意済みの処理（カードの取得・ボタン処理・`.result` への表示）は書き換えないでください
+- HTML構造（`.gallery` / `.card` / `.card-name` / `data-category` / `.filter-btn` / `.result`）は変えないでください
+- カードの `data-category` の値（`fruit` / `animal` / `food`）や名前は変更しないでください
 - `students/` 以外のファイルは変更しないでください
 - エラーが出たら修正して再度 push してください
 
