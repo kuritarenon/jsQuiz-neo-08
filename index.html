@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsQuiz08 - map と filter で絵文字ギャラリー</title>
+    <style>
+      body {
+        width: 700px;
+        margin: 20px auto;
+        padding: 0 16px;
+      }
+
+      .filter-buttons {
+        margin-bottom: 20px;
+      }
+
+      .filter-buttons button {
+        padding: 6px 12px;
+        margin-right: 6px;
+        cursor: pointer;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .card {
+        width: 110px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
+      }
+
+      .card-emoji {
+        font-size: 3rem;
+        line-height: 1.2;
+      }
+
+      .card-name {
+        margin-top: 6px;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>絵文字ギャラリー</h1>
+
+    <div class="filter-buttons">
+      <button class="filter-btn filter-all-btn">すべて表示</button>
+      <button class="filter-btn" data-category="fruit">くだもの</button>
+      <button class="filter-btn" data-category="animal">どうぶつ</button>
+      <button class="filter-btn" data-category="food">たべもの</button>
+    </div>
+
+    <div class="gallery"></div>
+
+    <script>
+      // ===== 「データ」と「関数」は用意済みです（書き換えないこと）=====
+
+      // 表示する絵文字データ（name=名前 / emoji=絵文字 / category=カテゴリ）
+      const items = [
+        { name: 'りんご', emoji: '🍎', category: 'fruit' },
+        { name: 'みかん', emoji: '🍊', category: 'fruit' },
+        { name: 'ぶどう', emoji: '🍇', category: 'fruit' },
+        { name: 'いぬ', emoji: '🐶', category: 'animal' },
+        { name: 'ねこ', emoji: '🐱', category: 'animal' },
+        { name: 'ぱんだ', emoji: '🐼', category: 'animal' },
+        { name: 'ラーメン', emoji: '🍜', category: 'food' },
+        { name: 'すし', emoji: '🍣', category: 'food' },
+        { name: 'ケーキ', emoji: '🍰', category: 'food' },
+      ];
+
+      const gallery = document.querySelector('.gallery');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // 絵文字データ1件を受け取り、カード1枚分の HTML 文字列を返す。
+      const cardHtml = function (item) {
+        return (
+          '<div class="card">' +
+          '<div class="card-emoji">' + item.emoji + '</div>' +
+          '<div class="card-name">' + item.name + '</div>' +
+          '</div>'
+        );
+      };
+
+      // 【お手本】最初はすべて表示する。
+      // map() で各データをカードHTMLに変換し、join('') でつなげて innerHTML に入れる。
+      gallery.innerHTML = items.map(cardHtml).join('');
+
+      // ===== ここから下があなたの課題です =====
+      //
+      // students/{あなたの学籍番号}/index.html にコピーして提出してください。
+      //
+      // やること:
+      //   各ボタン（buttons）に click イベントを設定し、押されたカテゴリの絵文字だけを表示する。
+      //   - カテゴリボタン（data-category="fruit" など） → そのカテゴリで filter して表示
+      //   - 「すべて表示」ボタン（data-category なし）   → 全件を表示
+      //
+      // 【ヒント】filter で絞り込み → map(cardHtml) で変換 → join('') して gallery.innerHTML に入れる
+    </script>
+  </body>
+</html>
